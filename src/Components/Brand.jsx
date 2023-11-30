@@ -10,10 +10,9 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Crud = () =>{
+const Brand = () =>{
     //boot
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
@@ -74,6 +73,7 @@ const Crud = () =>{
             getData();
             clear();
             toast.success("Updated successfully");
+            handleClose();
         })
         .catch((error) => {
             console.log(error);
@@ -93,6 +93,7 @@ const Crud = () =>{
             .catch((error) => {
                 console.log(error);
             })
+
         }
         
     }
@@ -123,39 +124,29 @@ const Crud = () =>{
     const clear = () => {
         setName('');
         setCategory('');
-        setisActive(0);
+        setisActive('');
         setEditName('');
         setEditCategory('');
-        setEditIsActive(0);
+        setEditIsActive('');
         setEditId('');
     }
 
 
-    const handleisActiveChange = (e) =>{
-        if(e.target.checked) setisActive(1);
-        else setisActive(0); 
-    }
 
-    const handleEditisActiveChange = (e) =>{
-        if(e.target.checked) setEditIsActive(1);
-        else setEditIsActive(0); 
-    }
     return(
         <Fragment>
             <ToastContainer/>
-            <Container>
+            <Container> ⠀⠀⠀⠀
                 <Row>
                     <Col><input type="text" className="form-control" placeholder="Enter Name" 
                     value={name} onChange={(e) => setName(e.target.value) }/></Col>
                     <Col><input type="text" className="form-control" placeholder="Enter Category"
                     value={category} onChange={(e) => setCategory(e.target.value) }/></Col>
-                    <Col><input type="checkbox"
-                    checked = {isActive === 1 ? true : false}
-                    onChange={(e) => handleisActiveChange(e)} value={isActive}
-                    /><label>isActive</label></Col>
-                    <Col><button className="btn btn-primary" onClick={() => handleSave()}>Submit</button></Col>
+                    <Col><input type="text" className="form-control" placeholder="Enter value"
+                    value={isActive} onChange={(e) => setisActive(e.target.value) }/></Col>
+                    <Col><button className="btn btn-success" onClick={() => handleSave()}>Submit</button></Col>
                 </Row>
-            </Container>
+            </Container>⠀⠀⠀
             <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -179,7 +170,7 @@ const Crud = () =>{
                                         <td>{item.category}</td>
                                         <td>{item.isActive}</td>
                                         <td colSpan={2}>
-                                            <button className="btn btn-primary" onClick={() => handleEdit(item.id)}>Edit</button> &nbsp;
+                                            <button className="btn btn-secondary" onClick={() => handleEdit(item.id)}>Edit</button> &nbsp;
                                             <button className="btn btn-danger" onClick={() => handleDelete(item.id)}>Delete</button>
                                         </td>
                                     </tr>
@@ -201,10 +192,8 @@ const Crud = () =>{
                             value={editName} onChange={(e) => setEditName(e.target.value) }/></Col>
                             <Col><input type="text" className="form-control" placeholder="Enter Category"
                             value={editCategory} onChange={(e) => setEditCategory(e.target.value) }/></Col>
-                            <Col><input type="checkbox"
-                            checked = {editIsActive === 1 ? true : false}
-                            onChange={(e) => handleEditisActiveChange(e)} value={editIsActive}
-                            /><label>isActive</label></Col>
+                            <Col><input type="text" className="form-control" placeholder="Enter value"
+                            value={editIsActive} onChange={(e) => setEditIsActive(e.target.value) }/></Col>
                             </Row>
                         </Container>
                         </Modal.Body>
@@ -212,7 +201,7 @@ const Crud = () =>{
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={() => handleUpdate()}>
+                    <Button variant="primary"  onClick={() => handleUpdate()}>
                         Save Changes
                     </Button>
                 </Modal.Footer>
@@ -221,4 +210,4 @@ const Crud = () =>{
     )
 }
 
-export default Crud;
+export default Brand;
